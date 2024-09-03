@@ -5,6 +5,8 @@ import { articleDataList } from "./articleData.js";
 import { commentDataList } from "./commentData.js";
 import { productDataList } from "./productData.js";
 
+import { sumCommentCount } from "../utils/sumCommentCount.js";
+
 const prisma = new PrismaClient();
 
 async function main() {
@@ -26,7 +28,7 @@ async function main() {
   // 초기 데이터 삽입
   const articleMaxCount = 20;
   const productMaxCount = 100;
-  const commentMaxCount = 100;
+  const commentMaxCount = 200;
   try {
     await prisma.product.createMany({
       data: productDataList(productMaxCount),
@@ -48,6 +50,12 @@ async function main() {
   } catch (error) {
     console.error("⛔⛔ 초기 데이터 시딩 실패");
     throw error;
+  }
+
+  try{
+    await sumCommentCount();
+  }catch(error){
+    console.log("⛔ sumCommentCount 실패 : ", error);
   }
 }
 
