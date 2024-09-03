@@ -6,6 +6,7 @@ export const articleDataList = (maxCount) => {
     const articleData = {
       title: faker.lorem.sentence({max: 20}),
       content: faker.lorem.lines({ max: 3 }),
+      category: "freeboard",
     };
     result.push(articleData);
   }
