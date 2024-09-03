@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Product" ADD COLUMN     "img" TEXT,
+ADD COLUMN     "like" INTEGER NOT NULL DEFAULT 0;
