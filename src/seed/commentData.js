@@ -7,7 +7,7 @@ export const commentDataList = (maxCount, articleMaxCount) => {
       content: faker.lorem.sentence({ max: 100 }),
       articleId: faker.number.int({ min: 1, max: articleMaxCount }),
     };
-    result.push(commentData(articleMaxCount));
+    result.push(data);
   }
   return result;
 };
