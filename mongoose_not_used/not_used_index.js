@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { PrismaClient } from '@prisma/client';
+import mongoose from 'mongoose';
 import productRoutesMongoose from './routes/products_mongoose.js';
 import productRoutesPrisma from './routes/products_prisma.js';
 
@@ -13,13 +13,16 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
-// Prisma 연결 (PostgreSQL)
-prisma.$connect()
-  .then(() => console.log('✅ PostgreSQL (Prisma) 연결 성공'))
-  .catch((error) => {
-    console.error('❌ PostgreSQL (Prisma) 연결 실패:', error);
-    process.exit(1);
-  });
+// MongoDB 연결
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('✅ MongoDB 연결 성공'))
+.catch((error) => {
+  console.error('❌ MongoDB 연결 실패:', error);
+  process.exit(1);
+});
 
 // API 라우트 설정
 app.use('/api/products/mongoose', productRoutesMongoose);
