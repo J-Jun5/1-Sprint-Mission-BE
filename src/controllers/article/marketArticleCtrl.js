@@ -1,4 +1,4 @@
-import { articleModel } from '../models/articleModel';
+import { articleModel } from '../../models/articleModel.js';
 
 export const marketArticleCtrl = {
   getAllArticles: async (req, res) => {

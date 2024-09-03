@@ -1,4 +1,4 @@
-import { commentModel } from '../models/commentModel';
+import { commentModel } from '../../models/commentModel.js';
 
 export const freeBoardCommentCtrl = {
   // 댓글 등록 API (자유게시판)

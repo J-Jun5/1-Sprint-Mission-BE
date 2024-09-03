@@ -1,4 +1,4 @@
-import { commentModel } from '../models/commentModel';
+import { commentModel } from '../../models/commentModel.js';
 
 export const commonCommentCtrl = {
   // 댓글 수정 API

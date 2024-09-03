@@ -1,4 +1,4 @@
-import { productModel } from '../models/productModel.js';
+import { productModel } from "../../models/productModel.js";
 
 export const getProductCtrl = {
   // 전체 상품 조회 API

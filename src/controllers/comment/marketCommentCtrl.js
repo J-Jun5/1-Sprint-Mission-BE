@@ -1,22 +1,17 @@
+import { commentModel } from '../../models/commentModel.js';
+
 export const marketCommentCtrl = {
   // 댓글 등록 API (중고마켓)
   createComment: async (req, res) => {
     const { content, articleId } = req.body;
     try {
-      const article = await prisma.article.findUnique({
-        where: { id: articleId },
-      });
+      const article = await commentModel.getArticleById(articleId);
 
       if (!article || article.category !== 'market') {
         return res.status(400).json({ error: 'Invalid article category' });
       }
 
-      const comment = await prisma.comment.create({
-        data: {
-          content,
-          articleId,
-        },
-      });
+      const comment = await commentModel.createComment(content, articleId);
       res.status(201).json(comment);
     } catch (error) {
       console.error('Error creating market comment:', error);
@@ -28,19 +23,7 @@ export const marketCommentCtrl = {
   getAllComments: async (req, res) => {
     const { cursor, limit = 10 } = req.query;
     try {
-      const comments = await prisma.comment.findMany({
-        where: { article: { category: 'market' } },
-        orderBy: { createdAt: 'desc' },
-        take: parseInt(limit),
-        cursor: cursor ? { id: parseInt(cursor) } : undefined,
-        skip: cursor ? 1 : 0,
-        select: {
-          id: true,
-          content: true,
-          createdAt: true,
-        },
-      });
-
+      const comments = await commentModel.getCommentsByCategory('market', { cursor, limit });
       res.status(200).json(comments);
     } catch (error) {
       console.error('Error fetching market comments:', error);

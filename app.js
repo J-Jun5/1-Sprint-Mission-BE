@@ -2,10 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
-
-import productRoute from "./routes/productRoute.js";
-import commentRoute from "./routes/commentRoute.js";
-import articleRoute from "./routes/articleRoute.js";
+console.log('Trying to import productRoutes from ./routes/productRoutes.js');
+import productRoute from "./src/routes/productRoute.js";
+import commentRoute from "./src/routes/commentRoute.js";
+import articleRoute from "./src/routes/articleRoute.js";
 
 dotenv.config();
 
