@@ -6,7 +6,7 @@ export const getAllArticles = {
       const {
         page = 1,
         limit = 10,
-        cartegory = "freeboard",
+        category = "freeboard",
         oderBy = "recent",
         sort = "desc",
         search = "",
@@ -32,17 +32,17 @@ export const getAllArticles = {
 
       let where_ctrl;
 
-      switch (cartegory) {
+      switch (category) {
         case "freeboard":
           if (search) {
             where_ctrl = {
-              cartegory: "freeboard",
+              category: "freeboard",
             };
           } else {
             where_ctrl = {
               AND: [
                 {
-                  cartegory: "freeboard",
+                  category: "freeboard",
                 },
                 {
                   title: {
@@ -58,13 +58,13 @@ export const getAllArticles = {
         case "market":
           if (search) {
             where_ctrl = {
-              cartegory: "market",
+              category: "market",
             };
           } else {
             where_ctrl = {
               AND: [
                 {
-                  cartegory: "market",
+                  category: "market",
                 },
                 {
                   title: {
@@ -78,10 +78,10 @@ export const getAllArticles = {
           break;
 
         default:
-          where_ctrl = { cartegory: "freeboard" };
+          where_ctrl = { category: "freeboard" };
       }
 
-      const articles = await articleModel.getAllArticlesByCategory(
+      const articles = await articleModel.getAllArticles(
         where_ctrl,
         sort_ctrl,
         offset,

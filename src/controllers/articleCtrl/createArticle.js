@@ -6,7 +6,7 @@ export const createArticle = {
     const { title, content, category } = req.body;
 
     try {
-      const newArticle = await articleModel.createProduct({
+      const newArticle = await articleModel.createArticle({
         title,
         content,
         category,

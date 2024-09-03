@@ -5,7 +5,7 @@ import {
   getArticleById,
   updateArticle,
   deleteArticle,
-} from "../controllers/articleCtrl";
+} from "../controllers/articleCtrl/index.js";
 
 const router = express.Router();
 // 게시물 전체 조회

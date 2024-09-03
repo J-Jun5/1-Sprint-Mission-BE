@@ -1,5 +1,5 @@
 import express from 'express';
-import { createComment, getAllComments, updateComment, deleteComment } from '../controllers/commentCtrl';
+import { createComment, getAllComments, updateComment, deleteComment } from '../controllers/commentCtrl/index.js';
 const router = express.Router();
 
 // 댓글 목록 조회 API
