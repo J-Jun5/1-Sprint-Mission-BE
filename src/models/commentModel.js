@@ -3,11 +3,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const commentModel = {
-  // 특정 카테고리의 댓글 목록 조회
-  getCommentsByCategory: async (category, { cursor, limit }) => {
+  // 특정 게시물의 댓글 목록 조회
+  getAllCommentsByArticleId: async (articleId, orderBy, cursor, limit ) => {
     return await prisma.comment.findMany({
-      where: { article: { category } },
-      orderBy: { createdAt: "desc" },
+      where: { articleId: parseInt(articleId) },
+      orderBy,
       take: parseInt(limit),
       cursor: cursor ? { id: parseInt(cursor) } : undefined,
       skip: cursor ? 1 : 0,
@@ -19,12 +19,19 @@ export const commentModel = {
     });
   },
 
+  getTotalCommentCount: async (articleId) => {
+    return await prisma.comment.count({
+      where: { articleId: articleId },
+    });
+  },
+
+
   // 댓글 생성
-  createComment: async (content, articleId) => {
+  createComment: async (data) => {
     return await prisma.comment.create({
       data: {
-        content,
-        articleId,
+        ...data,
+        createdAt: new Date(),
       },
     });
   },
@@ -44,10 +51,4 @@ export const commentModel = {
     });
   },
 
-  // 특정 게시글의 카테고리 확인
-  getArticleById: async (articleId) => {
-    return await prisma.article.findUnique({
-      where: { id: parseInt(articleId) },
-    });
-  },
 };

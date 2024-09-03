@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -21,6 +21,10 @@ export const productModel = {
         createdAt: true,
       },
     });
+  },
+
+  getTotalproductCount: async () => {
+    return await prisma.product.count();
   },
 
   // 특정 상품 조회
