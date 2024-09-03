@@ -4,10 +4,10 @@ const prisma = new PrismaClient();
 
 export const articleModel = {
   // 특정 카테고리의 게시글 목록 조회
-  getAllArticles: async (category, orderBy, offset, limit) => {
+  getAllArticles: async (where, orderBy, offset, limit) => {
     return await prisma.article.findMany({
-      where: { category },
-      orderBy: orderBy,
+      where,
+      orderBy,
       skip: parseInt(offset), // 건너뛸 DATA 갯수
       take: parseInt(limit), // offset 기준으로 가져올 DATA 갯수
       select: {
@@ -19,7 +19,7 @@ export const articleModel = {
     });
   },
 
-  // 게시글 조회
+  // 게시글 상세 조회
   getArticleById: async (id) => {
     return await prisma.article.findUnique({
       where: { id: parseInt(id) },

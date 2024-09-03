@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const commentModel = {
   // 특정 게시물의 댓글 목록 조회
-  getAllCommentsByArticleId: async (articleId, orderBy, cursor, limit ) => {
+  getAllComments: async (articleId, orderBy, cursor, limit ) => {
     return await prisma.comment.findMany({
       where: { articleId: parseInt(articleId) },
       orderBy,
@@ -48,6 +48,24 @@ export const commentModel = {
   deleteComment: async (id) => {
     return await prisma.comment.delete({
       where: { id: parseInt(id) },
+    });
+  },
+
+  incrementCommentCount: async (articleId) => {
+    return await prisma.post.update({
+      where: { id: articleId },
+      data: {
+        commentCount: { increment: 1 },
+      },
+    });
+  },
+
+  decrementCommentCount: async (articleId) => {
+    return await prisma.post.update({
+      where: { id: articleId },
+      data: {
+        commentCount: { decrement: 1 },
+      },
     });
   },
 
