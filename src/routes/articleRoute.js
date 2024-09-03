@@ -1,5 +1,5 @@
 import express from "express";
-import { freeBoardArticleCtrl, marketArticleCtrl, commonArticleCtrl } from "../controllers/article";
+import { freeBoardArticleCtrl, marketArticleCtrl, commonArticleCtrl } from "../controllers/article/index.js";
 
 const router = express.Router();
 // 게시물 전체 조회

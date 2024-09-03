@@ -2,9 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
-import productRoutes from './routes/productRoutes';
-import commentRoutes from './routes/commentRoutes';
-import articleRoutes from './routes/articleRoutes';
+
+import productRoute from "./routes/productRoute.js";
+import commentRoute from "./routes/commentRoute.js";
+import articleRoute from "./routes/articleRoute.js";
 
 dotenv.config();
 
@@ -23,9 +24,9 @@ prisma.$connect()
   });
 
 // 라우터 설정
-app.use('/api', productRoutes);
-app.use('/api', commentRoutes);
-app.use('/api', articleRoutes);
+app.use('/api', productRoute);
+app.use('/api', commentRoute);
+app.use('/api', articleRoute);
 
 app.get('/', (req, res) => {
   res.send('Server is up and running!');
