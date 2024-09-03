@@ -1,5 +1,5 @@
 import express from 'express';
-import { commonCommentCtrl, freeBoardCommentCtrl, marketCommentCtrl } from '../controllers/comment';
+import { commonCommentCtrl, freeBoardCommentCtrl, marketCommentCtrl } from '../controllers/comment/index.js';
 
 const router = express.Router();
 
