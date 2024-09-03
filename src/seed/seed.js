@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { resetIdSequence } from "utils/ResetIdSequence";
+import { resetIdSequence } from "../utils/resetIdSequence.js";
 
-import { articleDataList } from "seed/ArticleData";
-import { commentDataList } from "seed/CommentData";
-import { productDataList } from "seed/ProductData";
+import { articleDataList } from "./articleData.js";
+import { commentDataList } from "./commentData.js";
+import { productDataList } from "./productData.js";
 
 const prisma = new PrismaClient();
 
@@ -46,7 +46,8 @@ async function main() {
     });
     console.log("✅✅ comment 데이터 시딩 완료");
   } catch (error) {
-    console.error("⛔⛔ 초기 데이터 시딩 오류:", error);
+    console.error("⛔⛔ 초기 데이터 시딩 실패");
+    throw error;
   }
 }
 
@@ -56,7 +57,7 @@ main()
     console.log("✅✅✅ 시딩 ALL COMPLETED. ");
   })
   .catch(async (error) => {
-    console.error("⛔⛔⛔ 시딩 오류 : ", error);
+    console.error("⛔⛔⛔ 시딩 실패 원인 : ", error);
     await prisma.$disconnect();
     process.exit(1);
   });
