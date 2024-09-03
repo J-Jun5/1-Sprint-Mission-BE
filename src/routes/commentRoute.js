@@ -1,20 +1,17 @@
 import express from 'express';
-import { commonCommentCtrl, freeBoardCommentCtrl, marketCommentCtrl } from '../controllers/comment/index.js';
-
+import { createComment, getAllComments, updateComment, deleteComment } from '../controllers/commentCtrl';
 const router = express.Router();
 
 // 댓글 목록 조회 API
-router.get('/market/comments', marketCommentCtrl.getAllComments);
-router.get('/freeboard/comments', freeBoardCommentCtrl.getAllComments);
+router.get('/article/:id/comments', getAllComments.getAllComments);
 
 // 댓글 등록 API
-router.post('/market/comments', marketCommentCtrl.createComment);
-router.post('/freeboard/comments', freeBoardCommentCtrl.createComment);
+router.post('/article/:id/comments', createComment.createComment);
 
 // 댓글 수정 API
-router.patch('/comments/:id', commonCommentCtrl.updateComment);
+router.patch('/comments/:id', updateComment.updateComment);
 
-// 댓글 삭제 API
-router.delete('/comments/:id', commonCommentCtrl.deleteComment);
+// 댓글 삭제 API 
+router.delete('/comments/:id', deleteComment.deleteComment);
 
 export default router;
