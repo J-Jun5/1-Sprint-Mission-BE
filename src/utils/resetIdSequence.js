@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 // ID 시퀀스 리셋
-export async function ResetIdSequence() {
+export async function resetIdSequence() {
   console.log("▶️ ID 시퀀스 리셋 시작");
   try {
     await prisma.$executeRaw`ALTER SEQUENCE "Product_id_seq" RESTART WITH 1;`;
