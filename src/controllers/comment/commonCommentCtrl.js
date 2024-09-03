@@ -1,17 +1,12 @@
-import { PrismaClient } from '@prisma/client';
+import { commentModel } from '../models/commentModel';
 
-const prisma = new PrismaClient();
-
-export const CommonCommentCtrl = {
+export const commonCommentCtrl = {
   // 댓글 수정 API
   updateComment: async (req, res) => {
     const { id } = req.params;
     const { content } = req.body;
     try {
-      const comment = await prisma.comment.update({
-        where: { id: parseInt(id) },
-        data: { content },
-      });
+      const comment = await commentModel.updateComment(parseInt(id), content);
       res.status(200).json(comment);
     } catch (error) {
       console.error('Error updating comment:', error);
@@ -23,9 +18,7 @@ export const CommonCommentCtrl = {
   deleteComment: async (req, res) => {
     const { id } = req.params;
     try {
-      await prisma.comment.delete({
-        where: { id: parseInt(id) },
-      });
+      await commentModel.deleteComment(parseInt(id));
       res.status(204).send();
     } catch (error) {
       console.error('Error deleting comment:', error);
