@@ -1,5 +1,5 @@
 import express from "express";
-import { getProductCtrl, putdelProductCtrl, updateProductCtrl } from "../controllers/product/index.js";
+import { getProductCtrl, etcProductCtrl } from "../controllers/product/index.js";
 
 const router = express.Router();
 
@@ -8,13 +8,13 @@ router.get("/products", getProductCtrl.getAllProducts);
 router.get("/product/:id", getProductCtrl.getProductById);
 
 // 상품 등록
-router.post("/product", updateProductCtrl.createProduct);
+router.post("/product", etcProductCtrl.createProduct);
 
 // 상품 정보 수정
-router.put("/product/:id", putdelProductCtrl.updateProduct);
+router.put("/product/:id", etcProductCtrl.updateProduct);
 
 // 상품 정보 삭제
-router.delete("/product/:id", putdelProductCtrl.deleteProduct);
+router.delete("/product/:id", etcProductCtrl.deleteProduct);
 
 
 export default router;
