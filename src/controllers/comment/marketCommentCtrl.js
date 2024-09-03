@@ -1,10 +1,6 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
-
 export const marketCommentCtrl = {
   // 댓글 등록 API (중고마켓)
-  createMarketComment: async (req, res) => {
+  createComment: async (req, res) => {
     const { content, articleId } = req.body;
     try {
       const article = await prisma.article.findUnique({
@@ -29,7 +25,7 @@ export const marketCommentCtrl = {
   },
 
   // 댓글 목록 조회 API (중고마켓)
-  getMarketComments: async (req, res) => {
+  getAllComments: async (req, res) => {
     const { cursor, limit = 10 } = req.query;
     try {
       const comments = await prisma.comment.findMany({

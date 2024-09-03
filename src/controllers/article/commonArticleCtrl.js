@@ -1,24 +1,13 @@
-import { PrismaClient } from '@prisma/client';
+import { articleModel } from '../models/articleModel';
 
-const prisma = new PrismaClient();
-
-export const articleCtrl = {
+export const commonArticleCtrl = {
   // 게시물 수정 API
   updateArticle: async (req, res) => {
     const { id } = req.params;
     const { title, content, category } = req.body;
 
     try {
-      const updatedArticle = await prisma.article.update({
-        where: { id: parseInt(id) },
-        data: {
-          title,
-          content,
-          category,
-          updatedAt: new Date(), // 명시적으로 updatedAt 갱신
-        },
-      });
-
+      const updatedArticle = await articleModel.updateArticle(id, { title, content, category });
       res.status(200).json(updatedArticle);
     } catch (error) {
       console.error('Error updating article:', error);
@@ -35,10 +24,7 @@ export const articleCtrl = {
     const { id } = req.params;
 
     try {
-      await prisma.article.delete({
-        where: { id: parseInt(id) },
-      });
-
+      await articleModel.deleteArticle(id);
       res.status(204).send(); // No Content
     } catch (error) {
       console.error('Error deleting article:', error);
