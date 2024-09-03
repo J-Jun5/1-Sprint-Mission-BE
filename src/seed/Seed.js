@@ -24,21 +24,24 @@ async function main() {
   await resetIdSequence();
 
   // 초기 데이터 삽입
+  const articleMaxCount = 20;
+  const productMaxCount = 100;
+  const commentMaxCount = 100;
   try {
     await prisma.product.createMany({
-      data: productDataList(10),
+      data: productDataList(productMaxCount),
       skipDuplicates: true,
     });
     console.log("✅✅ product 데이터 시딩 완료");
 
     await prisma.article.createMany({
-      data: articleDataList(10),
+      data: articleDataList(articleMaxCount),
       skipDuplicates: true,
     });
     console.log("✅✅ article 데이터 시딩 완료");
 
     await prisma.comment.createMany({
-      data: commentDataList(10),
+      data: commentDataList(commentMaxCount, articleMaxCount),
       skipDuplicates: true,
     });
     console.log("✅✅ comment 데이터 시딩 완료");
