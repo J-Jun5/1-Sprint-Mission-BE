@@ -6,6 +6,31 @@ Content-Type: application/json
 GET http://localhost:5000/api/article/1
 Content-Type: application/json
 
-#### 댓글 조회
-GET http://localhost:5000/api/article/2/comment
+#### 댓글 전체 조회
+GET http://localhost:5000/api/article/15/comments
 Content-Type: application/json
+
+### 댓글 추가
+POST http://localhost:5000/api/article/15
+Content-Type: application/json
+
+{
+  "content" : "아이고 어렵다아"
+}
+
+### 댓글 수정
+PATCH http://localhost:5000/api/comments/55
+Content-Type: application/json
+
+{
+  "content" : "아이고 힘들다아아아아"
+}
+
+
+### 댓글 삭제
+DELETE http://localhost:5000/api/article/15
+Content-Type: application/json
+
+{
+  "id" : 54
+}

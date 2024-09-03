@@ -6,12 +6,12 @@ const router = express.Router();
 router.get('/article/:id/comments', getAllComments.getAllComments);
 
 // 댓글 등록 API
-router.post('/article/:id/comments', createComment.createComment);
+router.post('/article/:id', createComment.createComment);
 
 // 댓글 수정 API
 router.patch('/comments/:id', updateComment.updateComment);
 
 // 댓글 삭제 API 
-router.delete('/comments/:id', deleteComment.deleteComment);
+router.delete('/article/:id', deleteComment.deleteComment);
 
 export default router;

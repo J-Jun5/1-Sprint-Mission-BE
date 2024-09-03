@@ -4,15 +4,15 @@ const prisma = new PrismaClient();
 
 export const articleModel = {
   // 특정 카테고리의 게시글 목록 조회
-  getAllArticles: async (where, orderBy, offset, limit) => {
-    return await prisma.article.findMany({
-      where,
-      orderBy,
-      skip: parseInt(offset), // 건너뛸 DATA 갯수
-      take: parseInt(limit), // offset 기준으로 가져올 DATA 갯수
+  getAllComments: async ({ articleId, cursor, limit, sort }) => {
+    return await prisma.comment.findMany({
+      where: { articleId: articleId }, // 단순히 값으로 비교
+      orderBy: { createdAt: sort },  // 정렬 기준
+      take: parseInt(limit),  // 가져올 댓글 수
+      skip: cursor ? 1 : 0,  // 커서를 스킵할지 여부
+      cursor: cursor ? { id: parseInt(cursor) } : undefined,  // 커서 위치
       select: {
         id: true,
-        title: true,
         content: true,
         createdAt: true,
       },

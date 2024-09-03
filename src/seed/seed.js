@@ -28,7 +28,7 @@ async function main() {
   // 초기 데이터 삽입
   const articleMaxCount = 20;
   const productMaxCount = 100;
-  const commentMaxCount = 200;
+  const commentMaxCount = 50;
   try {
     await prisma.product.createMany({
       data: productDataList(productMaxCount),
