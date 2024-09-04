@@ -18,10 +18,10 @@ async function main() {
   await resetIdSequence();
 
   // 데이터 갯수 설정
-  const userMaxCount = 10;
-  const articleMaxCount = 20;
-  const productMaxCount = 100;
-  const commentMaxCount = 50;
+  const userMaxCount = 50;
+  const articleMaxCount = 100;
+  const productMaxCount = 500;
+  const commentMaxCount = 500;
 
   // 유저 데이터 삽입
   try {

@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id          Int       @id @default(autoincrement())
-  profileImg  String?
+  profileImg  String? 
   nickname    String    @unique @db.VarChar(10)
   email       String    @unique @db.VarChar(50)
   password    String    @db.VarChar(30)

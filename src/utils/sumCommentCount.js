@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function sumCommentCount() {
-  console.log("▶️  SumCommentCount 시작");
+  console.log("❓❓❓ SumCommentCount 시작");
   // 모든 게시물을 조회
   const articles = await prisma.article.findMany();
   
@@ -19,10 +19,10 @@ export async function sumCommentCount() {
     await prisma.article.update({
       where: { id: article.id },
       data: {
-        commentcount: totalCommentCount._count.id, // 댓글 수를 업데이트
+        commentCount: totalCommentCount._count.id, // 댓글 수를 업데이트
       },
     });
   }
 
-  console.log('✅ totalCommentCount 초기화 및 업데이트 완료');
+  console.log('✅✅✅ totalCommentCount 초기화 및 업데이트 완료');
 }

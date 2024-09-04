@@ -19,13 +19,22 @@ export async function deleteAllRecords() {
   }
 }
 
-// deleteAllRecords()
-//   .then(async () => {
-//     await prisma.$disconnect();
-//     console.log("✅✅ 데이터 삭제 ALL COMPLETED. ");
-//   })
-//   .catch(async (error) => {
-//     console.error("⛔⛔ 데이터 삭제 실패 원인 : ", error);
-//     await prisma.$disconnect();
-//     process.exit(1);
-//   });
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+// 파일이 직접 실행되는지 확인하는 코드
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+if (process.argv[1] === __filename) {
+  deleteAllRecords()
+    .then(async () => {
+      await prisma.$disconnect();
+      console.log("✅✅ 데이터 삭제 ALL COMPLETED.");
+    })
+    .catch(async (error) => {
+      console.error("⛔⛔ 데이터 삭제 실패 원인: ", error);
+      await prisma.$disconnect();
+      process.exit(1);
+    });
+}

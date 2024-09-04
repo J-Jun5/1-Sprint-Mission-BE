@@ -4,6 +4,7 @@ export const userDataList = (maxCount) => {
   const result = [];
   for (let i = 0; i < maxCount; i++) {
     const userData = {
+      profileImg: "images/profile_default.png",
       nickname: faker.internet.userName().substring(0, 10),
       email: faker.internet.email(),
       password: "1234",
