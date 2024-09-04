@@ -13,6 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          Int       @id @default(autoincrement())
+  nickname    String    @unique @db.VarChar(10)
+  email       String    @unique @db.VarChar(30)
+  password    String    @db.VarChar(30)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  productList Product[]
+  articleList Article[]
+  Comment     Comment[]
+}
+
 model Product {
   id          Int      @id @default(autoincrement())
   img         String?
@@ -23,24 +35,31 @@ model Product {
   tags        String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  sellerName  String?
+  user        User?    @relation(fields: [sellerName], references: [nickname], onDelete: SetNull)
 }
 
 model Article {
   id           Int       @id @default(autoincrement())
+  category     String    @default("") // 'market' 또는 'freeboard'
   title        String
   content      String
-  category     String    @default("") // 'market' 또는 'freeboard'
+  like         Int       @default(0)
   commentcount Int       @default(0)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+  authorName   String?
+  user         User?     @relation(fields: [authorName], references: [nickname], onDelete: SetNull)
   comments     Comment[]
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  articleId Int
-  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  id         Int      @id @default(autoincrement())
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  articleId  Int
+  article    Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  authorName String?
+  user       User?    @relation(fields: [authorName], references: [nickname], onDelete: SetNull)
 }
