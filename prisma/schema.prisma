@@ -15,6 +15,7 @@ datasource db {
 
 model User {
   id          Int       @id @default(autoincrement())
+  profileImg  String?
   nickname    String    @unique @db.VarChar(10)
   email       String    @unique @db.VarChar(50)
   password    String    @db.VarChar(30)
@@ -27,12 +28,13 @@ model User {
 
 model Product {
   id          Int      @id @default(autoincrement())
-  img         String?
-  name        String   @db.VarChar(10)
+  category    String?
+  productImg  String?
+  productName String   @db.VarChar(10)
   description String   @db.VarChar(100)
   price       Float
   like        Int      @default(0)
-  tags        String[]
+  productTags String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   sellerName  String?
@@ -41,11 +43,12 @@ model Product {
 
 model Article {
   id           Int       @id @default(autoincrement())
-  category     String    @default("") // 'market' 또는 'freeboard'
+  board        String    @default("") // 'market' 또는 'freeboard'
+  articleImg   String?
   title        String
   content      String
   like         Int       @default(0)
-  commentcount Int       @default(0)
+  commentCount Int       @default(0)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   authorName   String?
