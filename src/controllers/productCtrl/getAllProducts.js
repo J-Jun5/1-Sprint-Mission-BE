@@ -62,12 +62,15 @@ export const getAllProducts = {
       }); 
 
       // 총 상품 수 조회 (페이지네이션 용)
-      const totalProducts = products.length; // 모델에서 받아온 products의 길이로 전체 수 계산
+      const totalProducts = await productModel.getTotalproductCount();
+
+      const totalpages = Math.ceil(totalProducts / limit);
 
       res.status(200).json({
         data: products,
         pagination: {
           total: totalProducts,
+          totalpages: totalpages,
           page: parseInt(page),
           limit: parseInt(limit),
         },

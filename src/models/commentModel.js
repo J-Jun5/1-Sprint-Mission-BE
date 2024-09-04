@@ -51,6 +51,8 @@ export const commentModel = {
     });
   },
 
+
+  //댓글 갯수 증가/감소
   incrementCommentCount: async (articleId) => {
     return await prisma.article.update({
       where: { id: articleId },
