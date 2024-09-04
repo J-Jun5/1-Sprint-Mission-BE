@@ -8,7 +8,8 @@
     "start": "node server.js",
     "postinstall": "npx prisma migrate deploy && npx prisma generate",
     "dev": "nodemon server.js",
-    "seed": "node src/seed/seed.js"
+    "seed": "node src/seed/seed.js",
+    "delseed": "node src/utils/deleteRecord.js"
   },
   "keywords": [],
   "author": "",

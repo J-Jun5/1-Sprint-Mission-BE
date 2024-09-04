@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker/locale/ko";
 
-export const productDataList = (maxCount) => {
+export const productDataList = (maxCount, userName) => {
   const result = [];
   for (let i = 0; i < maxCount; i++) {
     const productData = {
@@ -10,6 +10,7 @@ export const productDataList = (maxCount) => {
       price: faker.number.int({ min: 1, max: 300 }) * 10000,
       like: faker.number.int({ min: 0, max: 999 }),
       tags: ["tag1", "tag2"],
+      sellerName: userName[faker.number.int({ min: 0, max: userName.length - 1 })],
     };
     result.push(productData);
   }
